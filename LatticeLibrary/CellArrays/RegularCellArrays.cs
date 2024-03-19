@@ -32,7 +32,8 @@
 // limitations under the License.   
 //
 
-
+using System;
+using System.Collections.Generic;
 using System.Numerics;
 using PicoGK;
 
@@ -45,7 +46,7 @@ namespace Leap71
     {
         public interface ICellArray
         {
-            public List<IUnitCell> aGetUnitCells();
+            List<IUnitCell> aGetUnitCells();
         }
 
         public class RegularCellArray : ICellArray
@@ -75,7 +76,7 @@ namespace Leap71
                 m_dX            = dX;
                 m_dY            = dY;
                 m_dZ            = dZ;
-                m_fNoiseLevel   = Uf.fLimitValue(MathF.Abs(fNoiseLevel), 0f, 0.3f);
+                m_fNoiseLevel   = Uf.fLimitValue((float)Math.Abs(fNoiseLevel), 0f, 0.3f);
                 m_oVoxels       = oVoxels;
                 m_oVoxels.CalculateProperties(out float fVolumeCubicMM, out BBox3 oBBox);
 
@@ -168,7 +169,7 @@ namespace Leap71
                 m_dX            = dX;
                 m_dY            = dY;
                 m_dZ            = dZ;
-                m_fNoiseLevel   = Uf.fLimitValue(MathF.Abs(fNoiseLevel), 0f, 0.3f);
+                m_fNoiseLevel   = Uf.fLimitValue((float)Math.Abs(fNoiseLevel), 0f, 0.3f);
 
                 m_aUnitCells = new List<IUnitCell>();
                 float fX = -0.5f * m_dX;

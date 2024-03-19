@@ -32,7 +32,7 @@
 // limitations under the License.   
 //
 
-
+using System;
 using System.Numerics;
 using PicoGK;
 
@@ -52,7 +52,7 @@ namespace Leap71
             /// </summary>
             public ImplicitSplitWallGyroid(float fUnitSize, float fWallThickness, bool bSide)
 			{
-                m_fFrequencyScale   = (2f * MathF.PI) / fUnitSize;
+                m_fFrequencyScale   = (2f * (float)Math.PI) / fUnitSize;
                 m_fWallThickness    = fWallThickness;
                 m_bSide             = bSide;
             }

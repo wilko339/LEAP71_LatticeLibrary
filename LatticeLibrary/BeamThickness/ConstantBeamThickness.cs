@@ -46,9 +46,9 @@ namespace Leap71
         /// </summary>
         public interface IBeamThickness
         {
-            public float fGetBeamThickness(Vector3 vecPt);
-            public void  UpdateCell(IUnitCell xCell);
-            public void  SetBoundingVoxels(Voxels voxBounding);
+            float fGetBeamThickness(Vector3 vecPt);
+            void  UpdateCell(IUnitCell xCell);
+            void  SetBoundingVoxels(Voxels voxBounding);
         }
 
         /// <summary>

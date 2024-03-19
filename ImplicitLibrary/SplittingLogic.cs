@@ -32,6 +32,7 @@
 // limitations under the License.   
 //
 
+using System;
 
 namespace Leap71
 {
@@ -39,7 +40,7 @@ namespace Leap71
 	{
         public interface ISplittingLogic
         {
-            public float fGetAdvancedSignedDistance(float fSignedDistance, float fWallThickness);
+            float fGetAdvancedSignedDistance(float fSignedDistance, float fWallThickness);
         }
 
         public class FullWallLogic : ISplittingLogic

@@ -32,7 +32,8 @@
 // limitations under the License.   
 //
 
-
+using System;
+using System.Collections.Generic;
 using System.Numerics;
 using PicoGK;
 
@@ -43,7 +44,7 @@ namespace Leap71
     {
         public interface ILatticeType
         {
-            public void AddCell(
+            void AddCell(
                 ref Lattice     oLattice,
                 IUnitCell       xCell,
                 IBeamThickness  xBeamThickness,

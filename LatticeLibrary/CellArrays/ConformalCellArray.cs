@@ -32,7 +32,8 @@
 // limitations under the License.   
 //
 
-
+using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 
@@ -176,6 +177,47 @@ namespace Leap71
                 }
             }
 
+            public ConformalCellArray(
+                BasePipe oPipe,
+                uint nNumberInX,
+                uint nNumberInY,
+                uint nNumberInZ)
+            {
+                m_nNumberInX = nNumberInX;
+                m_nNumberInY = nNumberInY;
+                m_nNumberInZ = nNumberInZ;
+
+                m_aUnitCells = new List<IUnitCell>();
+                for (uint nX = 1; nX <= nNumberInX; nX++)
+                {
+                    for (uint nY = 1; nY <= nNumberInY; nY++)
+                    {
+                        for (uint nZ = 1; nZ <= nNumberInZ; nZ++)
+                        {
+                            Vector3 vecCorner_01 = vecGetInternalPipePt(oPipe, nX - 1, nY - 1, nZ - 1);
+                            Vector3 vecCorner_02 = vecGetInternalPipePt(oPipe, nX, nY - 1, nZ - 1);
+                            Vector3 vecCorner_03 = vecGetInternalPipePt(oPipe, nX, nY, nZ - 1);
+                            Vector3 vecCorner_04 = vecGetInternalPipePt(oPipe, nX - 1, nY, nZ - 1);
+                            Vector3 vecCorner_05 = vecGetInternalPipePt(oPipe, nX - 1, nY - 1, nZ);
+                            Vector3 vecCorner_06 = vecGetInternalPipePt(oPipe, nX, nY - 1, nZ);
+                            Vector3 vecCorner_07 = vecGetInternalPipePt(oPipe, nX, nY, nZ);
+                            Vector3 vecCorner_08 = vecGetInternalPipePt(oPipe, nX - 1, nY, nZ);
+
+                            IUnitCell xCell = new CuboidCell(
+                                vecCorner_01,
+                                vecCorner_02,
+                                vecCorner_03,
+                                vecCorner_04,
+                                vecCorner_05,
+                                vecCorner_06,
+                                vecCorner_07,
+                                vecCorner_08);
+                            m_aUnitCells.Add(xCell);
+                        }
+                    }
+                }
+            }
+
             protected Vector3 vecGetInternalBoxPt(BaseBox oBox, uint nX, uint nY, uint nZ)
             {
                 float fLengthRatio  = (1f * (float)nZ / (float)m_nNumberInZ) - 0f;        //0 to 1
@@ -206,6 +248,15 @@ namespace Leap71
                 return vecPt;
             }
 
+            protected Vector3 vecGetInternalPipePt(BasePipe oPipe, uint nX, uint nY, uint nZ)
+            {
+                float fPhiRatio = (1f * (float)nZ / (float)m_nNumberInZ) - 0f;        //0 to 1
+                float fLengthRatio = (1f * (float)nX / (float)m_nNumberInX) - 0f;        //0 to 1
+                float fRadiusRatio = (1f * (float)nY / (float)m_nNumberInY) - 0f;        //0 to 1
+
+                Vector3 vecPt = oPipe.vecGetSurfacePoint(fLengthRatio, fPhiRatio, fRadiusRatio);
+                return vecPt;
+            }
             public List<IUnitCell> aGetUnitCells()
             {
                 return m_aUnitCells;
@@ -224,12 +275,12 @@ namespace Leap71
 
             protected static float fGetWidth_01(float fLengthRatio)
             {
-                return 60 + 20 * MathF.Cos(5f * fLengthRatio);
+                return 60 + 20 * (float)Math.Cos(5f * fLengthRatio);
             }
 
             protected static float fGetDepth_01(float fLengthRatio)
             {
-                return 80 - 40 * MathF.Cos(3f * fLengthRatio);
+                return 80 - 40 * (float)Math.Cos(3f * fLengthRatio);
             }
 
             public static BaseLens oGetLens_01()
@@ -248,7 +299,7 @@ namespace Leap71
 
             protected static float fGetUpperLens_01(float fPhi, float fRadiusRatio)
             {
-                return 20 + 5 * MathF.Cos(2f * fRadiusRatio);
+                return 20 + 5 * (float)Math.Cos(2f * fRadiusRatio);
             }
 
             public static BasePipeSegment oGetSegment_01()
@@ -266,7 +317,7 @@ namespace Leap71
 
             protected static float fGetPhiRange_01(float fLengthRatio)
             {
-                return MathF.PI - 0.45f * MathF.PI * MathF.Cos(3f * fLengthRatio);
+                return (float)Math.PI - 0.45f * (float)Math.PI * (float)Math.Cos(3f * fLengthRatio);
             }
 
             protected static float fGetInnerRadius_01(float fPhi, float fLengthRatio)
@@ -276,7 +327,7 @@ namespace Leap71
 
             protected static float fGetOuterRadius_01(float fPhi, float fLengthRatio)
             {
-                return fGetInnerRadius_01(fPhi, fLengthRatio) + 15 + 5 * MathF.Cos(4f * fPhi);
+                return fGetInnerRadius_01(fPhi, fLengthRatio) + 15 + 5 * (float)Math.Cos(4f * fPhi);
             }
         }
     }

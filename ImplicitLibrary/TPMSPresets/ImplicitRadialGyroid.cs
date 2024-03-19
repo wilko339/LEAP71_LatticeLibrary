@@ -32,7 +32,7 @@
 // limitations under the License.   
 //
 
-
+using System;
 using System.Numerics;
 using PicoGK;
 
@@ -54,7 +54,7 @@ namespace Leap71
             /// </summary>
             public ImplicitRadialGyroid(uint nUnitsPerRound, float fUnitSizeInZ, float fWallThickness)
 			{
-                m_fFrequencyScale    = (2f * MathF.PI) / fUnitSizeInZ;
+                m_fFrequencyScale    = (2f * (float)Math.PI) / fUnitSizeInZ;
                 m_fWallThickness     = fWallThickness;
                 m_nSamplesPerRound   = nUnitsPerRound;
             }
@@ -63,10 +63,10 @@ namespace Leap71
 			{
                 //map carthesian point to cylindrical coordinates
                 float fRadius       = VecOperations.fGetRadius(vecPt);
-                float dPhi          = (2f * MathF.PI) / m_nSamplesPerRound;
-                float fPhi          = VecOperations.fGetPhi(vecPt) + MathF.PI;
+                float dPhi          = (2f * (float)Math.PI) / m_nSamplesPerRound;
+                float fPhi          = VecOperations.fGetPhi(vecPt) + (float)Math.PI;
                 float fPhiIntervals = fPhi / dPhi;
-                float fUnitSize     = (2f * MathF.PI) / m_fFrequencyScale;
+                float fUnitSize     = (2f * (float)Math.PI) / m_fFrequencyScale;
                 double dX           = (double)fRadius;
                 double dY           = (double)(fPhiIntervals * fUnitSize);
                 double dZ           = vecPt.Z;

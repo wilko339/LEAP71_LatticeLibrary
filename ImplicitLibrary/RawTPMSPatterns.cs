@@ -32,6 +32,7 @@
 // limitations under the License.   
 //
 
+using System;
 
 namespace Leap71
 {
@@ -41,72 +42,72 @@ namespace Leap71
 	{
         public interface IRawTPMSPattern
         {
-            public float fGetSignedDistance(float fX, float fY, float fZ);
+            float fGetSignedDistance(float fX, float fY, float fZ);
         }
 
         public class RawGyroidTPMSPattern : IRawTPMSPattern
         {
-            protected const float m_fFrequencyScale = (2f * MathF.PI);
+            protected const float m_fFrequencyScale = (2f * (float)Math.PI);
 
             public RawGyroidTPMSPattern() { }
 
             public float fGetSignedDistance(float fX, float fY, float fZ)
             {
-                float fDist =    MathF.Sin(m_fFrequencyScale * fX) * MathF.Cos(m_fFrequencyScale * fY) +
-                                 MathF.Sin(m_fFrequencyScale * fY) * MathF.Cos(m_fFrequencyScale * fZ) +
-                                 MathF.Sin(m_fFrequencyScale * fZ) * MathF.Cos(m_fFrequencyScale * fX);
+                float fDist =    (float)Math.Sin(m_fFrequencyScale * fX) * (float)Math.Cos(m_fFrequencyScale * fY) +
+                                 (float)Math.Sin(m_fFrequencyScale * fY) * (float)Math.Cos(m_fFrequencyScale * fZ) +
+                                 (float)Math.Sin(m_fFrequencyScale * fZ) * (float)Math.Cos(m_fFrequencyScale * fX);
                 return fDist;
             }
         }
 
         public class RawLidinoidTPMSPattern : IRawTPMSPattern
         {
-            protected const float m_fFrequencyScale = 0.5f * (2f * MathF.PI);
+            protected const float m_fFrequencyScale = 0.5f * (2f * (float)Math.PI);
 
             public RawLidinoidTPMSPattern() { }
 
             public float fGetSignedDistance(float fX, float fY, float fZ)
             {
-                float fDist =   +0.5f * (MathF.Sin(2 * m_fFrequencyScale * fX) * MathF.Cos(m_fFrequencyScale * fY) * MathF.Sin(m_fFrequencyScale * fZ) +
-                                         MathF.Sin(2 * m_fFrequencyScale * fY) * MathF.Cos(m_fFrequencyScale * fZ) * MathF.Sin(m_fFrequencyScale * fX) +
-                                         MathF.Sin(2 * m_fFrequencyScale * fZ) * MathF.Cos(m_fFrequencyScale * fX) * MathF.Sin(m_fFrequencyScale * fY))
+                float fDist =   +0.5f * ((float)Math.Sin(2 * m_fFrequencyScale * fX) * (float)Math.Cos(m_fFrequencyScale * fY) * (float)Math.Sin(m_fFrequencyScale * fZ) +
+                                         (float)Math.Sin(2 * m_fFrequencyScale * fY) * (float)Math.Cos(m_fFrequencyScale * fZ) * (float)Math.Sin(m_fFrequencyScale * fX) +
+                                         (float)Math.Sin(2 * m_fFrequencyScale * fZ) * (float)Math.Cos(m_fFrequencyScale * fX) * (float)Math.Sin(m_fFrequencyScale * fY))
                                                                                                                          
-                               - 0.5f * (MathF.Cos(2 * m_fFrequencyScale * fX) * MathF.Cos(2 * m_fFrequencyScale * fY) +
-                                         MathF.Cos(2 * m_fFrequencyScale * fY) * MathF.Cos(2 * m_fFrequencyScale * fZ) +
-                                         MathF.Cos(2 * m_fFrequencyScale * fZ) * MathF.Cos(2 * m_fFrequencyScale * fX));
+                               - 0.5f * ((float)Math.Cos(2 * m_fFrequencyScale * fX) * (float)Math.Cos(2 * m_fFrequencyScale * fY) +
+                                         (float)Math.Cos(2 * m_fFrequencyScale * fY) * (float)Math.Cos(2 * m_fFrequencyScale * fZ) +
+                                         (float)Math.Cos(2 * m_fFrequencyScale * fZ) * (float)Math.Cos(2 * m_fFrequencyScale * fX));
                 return fDist;
             }
         }
 
         public class RawSchwarzPrimitiveTPMSPattern : IRawTPMSPattern
         {
-            protected const float m_fFrequencyScale = (2f * MathF.PI);
+            protected const float m_fFrequencyScale = (2f * (float)Math.PI);
 
             public RawSchwarzPrimitiveTPMSPattern() { }
 
             public float fGetSignedDistance(float fX, float fY, float fZ)
             {
-                float fDist =  (MathF.Cos(m_fFrequencyScale * fX) +
-                                MathF.Cos(m_fFrequencyScale * fY) +
-                                MathF.Cos(m_fFrequencyScale * fZ));
+                float fDist =  ((float)Math.Cos(m_fFrequencyScale * fX) +
+                                (float)Math.Cos(m_fFrequencyScale * fY) +
+                                (float)Math.Cos(m_fFrequencyScale * fZ));
                 return fDist;
             }
         }
 
         public class RawSchwarzDiamondTPMSPattern : IRawTPMSPattern
         {
-            protected const float m_fFrequencyScale = 0.5f * (2f * MathF.PI);
+            protected const float m_fFrequencyScale = 0.5f * (2f * (float)Math.PI);
 
             public RawSchwarzDiamondTPMSPattern() { }
 
             public float fGetSignedDistance(float fX, float fY, float fZ)
             {
-                float fDist =  +(MathF.Cos(m_fFrequencyScale * fX) *
-                                 MathF.Cos(m_fFrequencyScale * fY) *
-                                 MathF.Cos(m_fFrequencyScale * fZ))
-                              - (MathF.Sin(m_fFrequencyScale * fX) *
-                                 MathF.Sin(m_fFrequencyScale * fY) *
-                                 MathF.Sin(m_fFrequencyScale * fZ));
+                float fDist =  +((float)Math.Cos(m_fFrequencyScale * fX) *
+                                 (float)Math.Cos(m_fFrequencyScale * fY) *
+                                 (float)Math.Cos(m_fFrequencyScale * fZ))
+                              - ((float)Math.Sin(m_fFrequencyScale * fX) *
+                                 (float)Math.Sin(m_fFrequencyScale * fY) *
+                                 (float)Math.Sin(m_fFrequencyScale * fZ));
                 return fDist;
             }
         }

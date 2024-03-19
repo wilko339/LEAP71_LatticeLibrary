@@ -32,7 +32,7 @@
 // limitations under the License.   
 //
 
-
+using System;
 using System.Numerics;
 using PicoGK;
 
@@ -53,7 +53,7 @@ namespace Leap71
             /// </summary>
             public ImplicitSchwarzDiamond(float fUnitSize, float fWallThickness)
 			{
-                m_fFrequencyScale   = 0.5f * (2f * MathF.PI) / fUnitSize;
+                m_fFrequencyScale   = 0.5f * (2f * (float)Math.PI) / fUnitSize;
                 m_fWallThickness    = fWallThickness;
             }
 

@@ -32,7 +32,8 @@
 // limitations under the License.   
 //
 
-
+using System;
+using System.Collections.Generic;
 using System.Numerics;
 using PicoGK;
 
@@ -45,10 +46,9 @@ namespace Leap71
     {
         public interface IUnitCell
         {
-            public List<Vector3>    aGetCornerPoints();
-            public Vector3          vecGetCellCentre();
-            public BBox3            oGetCellBounding();
-            public void             PreviewUnitCell();
+            List<Vector3>        aGetCornerPoints();
+            Vector3              vecGetCellCentre();
+            BBox3                oGetCellBounding();
         }
 
         /// <summary>
@@ -144,29 +144,6 @@ namespace Leap71
             public List<Vector3> aGetCornerPoints()
             {
                 return m_aCornerPoints;
-            }
-
-            public void PreviewUnitCell()
-            {
-                //wireframe
-                Sh.PreviewLine(new List<Vector3>() { m_aCornerPoints[0], m_aCornerPoints[1], m_aCornerPoints[2], m_aCornerPoints[3], m_aCornerPoints[0] }, Cp.clrBlack);
-                Sh.PreviewLine(new List<Vector3>() { m_aCornerPoints[4], m_aCornerPoints[5], m_aCornerPoints[6], m_aCornerPoints[7], m_aCornerPoints[4] }, Cp.clrBlack);
-                Sh.PreviewLine(new List<Vector3>() { m_aCornerPoints[0], m_aCornerPoints[4] }, Cp.clrBlack);
-                Sh.PreviewLine(new List<Vector3>() { m_aCornerPoints[1], m_aCornerPoints[5] }, Cp.clrBlack);
-                Sh.PreviewLine(new List<Vector3>() { m_aCornerPoints[2], m_aCornerPoints[6] }, Cp.clrBlack);
-                Sh.PreviewLine(new List<Vector3>() { m_aCornerPoints[3], m_aCornerPoints[7] }, Cp.clrBlack);
-
-                ////corners
-                //Sh.PreviewPointCloud(aGetCornerPoints(), 0.1f, Cp.clrRed);
-
-                ////faces
-                //ColorFloat clrColor = Cp.clrRandom();
-                //Sh.PreviewMesh(MeshUtility.mshFromQuad(m_aCornerPoints[0], m_aCornerPoints[1], m_aCornerPoints[2], m_aCornerPoints[3]), clrColor, 0.3f);
-                //Sh.PreviewMesh(MeshUtility.mshFromQuad(m_aCornerPoints[4], m_aCornerPoints[5], m_aCornerPoints[6], m_aCornerPoints[7]), clrColor, 0.3f);
-                //Sh.PreviewMesh(MeshUtility.mshFromQuad(m_aCornerPoints[0], m_aCornerPoints[1], m_aCornerPoints[5], m_aCornerPoints[4]), clrColor, 0.3f);
-                //Sh.PreviewMesh(MeshUtility.mshFromQuad(m_aCornerPoints[1], m_aCornerPoints[2], m_aCornerPoints[6], m_aCornerPoints[5]), clrColor, 0.3f);
-                //Sh.PreviewMesh(MeshUtility.mshFromQuad(m_aCornerPoints[2], m_aCornerPoints[3], m_aCornerPoints[7], m_aCornerPoints[6]), clrColor, 0.3f);
-                //Sh.PreviewMesh(MeshUtility.mshFromQuad(m_aCornerPoints[3], m_aCornerPoints[0], m_aCornerPoints[4], m_aCornerPoints[7]), clrColor, 0.3f);
             }
         }
     }
