@@ -5,7 +5,7 @@ This is a fork from the original PicoGK library. This version has been modified 
 
 ## Prep
 
-You should have [PicoGK](https://github.com/leap71/PicoGK) up and running on your computer and have the [ShapeKernel](https://github.com/leap71/LEAP71_ShapeKernel) Library included in your Visual Studio project. This part of the documentation deals with **Lattices**, which are beam-based structures. If your are looking for the **[Implicit Library](README_ImplicitLibrary.md),** head over to the second part.
+You should have [PicoGK](https://github.com/leap71/PicoGK) up and running on your computer and have the [ShapeKernel](https://github.com/leap71/Leap71_ShapeKernel) Library included in your Visual Studio project. This part of the documentation deals with **Lattices**, which are beam-based structures. If your are looking for the **[Implicit Library](README_ImplicitLibrary.md),** head over to the second part.
 
 
 
@@ -14,10 +14,10 @@ You should have [PicoGK](https://github.com/leap71/PicoGK) up and running on you
 You can add the Lattice library in two ways:
 
 - Beginner
-  - download the LatticeLibrary source code as zip file from https://github.com/leap71/LEAP71_LatticeLibrary
+  - download the LatticeLibrary source code as zip file from https://github.com/leap71/Leap71_LatticeLibrary
   - un-zip and copy the files into your VS project folder
 - Pro
-  - add LatticeLibrary as a submodule, linking the Github repo: https://github.com/leap71/LEAP71_LatticeLibrary
+  - add LatticeLibrary as a submodule, linking the Github repo: https://github.com/leap71/Leap71_LatticeLibrary
 
 
 
