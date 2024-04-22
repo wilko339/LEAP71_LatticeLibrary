@@ -57,7 +57,7 @@ namespace Leap71
                 m_vCentrePoint      = vCentre;
             }
 
-			public float fSignedDistance(in Vector3 vecPt)
+			virtual public float fSignedDistance(in Vector3 vecPt)
 			{
                 double dX = vecPt.X - m_vCentrePoint.X;
                 double dY = vecPt.Y - m_vCentrePoint.Y;
@@ -72,18 +72,6 @@ namespace Leap71
                     (float)(Math.Max(-dDist, Math.Abs(dDist) - 0.5f * m_fWallThickness)));
 
                 return fFinalDist;
-
-                ////apply thickness to the gyroid surface
-                //if (m_bSide == true)
-                //{
-                //    float fFinalDist = (float)(Math.Max(dDist, Math.Abs(dDist) - 0.5f * m_fWallThickness));
-                //    return fFinalDist;
-                //}
-                //else
-                //{
-                //    float fFinalDist = (float)(Math.Max(-dDist, Math.Abs(dDist) - 0.5f * m_fWallThickness));
-                //    return fFinalDist;
-                //}
             }
 		}
     }
