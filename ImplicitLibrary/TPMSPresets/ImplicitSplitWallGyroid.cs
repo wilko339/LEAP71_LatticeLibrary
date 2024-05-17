@@ -45,40 +45,33 @@ namespace Leap71
 		{
             protected float         m_fFrequencyScale;
 			protected float		    m_fWallThickness;
-            protected bool          m_bSide;
+            protected Vector3       m_vCentrePoint;
 
             /// <summary>
             /// Helper class for an implicit gyroid pattern.
             /// </summary>
-            public ImplicitSplitWallGyroid(float fUnitSize, float fWallThickness, bool bSide)
+            public ImplicitSplitWallGyroid(float fUnitSize, Vector3 vCentre, float fWallThickness)
 			{
                 m_fFrequencyScale   = (2f * (float)Math.PI) / fUnitSize;
                 m_fWallThickness    = fWallThickness;
-                m_bSide             = bSide;
+                m_vCentrePoint      = vCentre;
             }
 
-			public float fSignedDistance(in Vector3 vecPt)
+			virtual public float fSignedDistance(in Vector3 vecPt)
 			{
-                double dX = vecPt.X;
-                double dY = vecPt.Y;
-                double dZ = vecPt.Z;
+                double dX = vecPt.X - m_vCentrePoint.X;
+                double dY = vecPt.Y - m_vCentrePoint.Y;
+                double dZ = vecPt.Z - m_vCentrePoint.Z;
 
                 //calculate the gyroid surface equation
                 double dDist =   Math.Sin(m_fFrequencyScale * dX) * Math.Cos(m_fFrequencyScale * dY) +
                                  Math.Sin(m_fFrequencyScale * dY) * Math.Cos(m_fFrequencyScale * dZ) +
                                  Math.Sin(m_fFrequencyScale * dZ) * Math.Cos(m_fFrequencyScale * dX);
 
-                //apply thickness to the gyroid surface
-                if (m_bSide == true)
-                {
-                    float fFinalDist = (float)(Math.Max(dDist, Math.Abs(dDist) - 0.5f * m_fWallThickness));
-                    return fFinalDist;
-                }
-                else
-                {
-                    float fFinalDist = (float)(Math.Max(-dDist, (Math.Abs(dDist) - 0.5f * m_fWallThickness)));
-                    return fFinalDist;
-                }
+                float fFinalDist = (float)Math.Min((float)(Math.Max(dDist, Math.Abs(dDist) - 0.5f * m_fWallThickness)),
+                    (float)(Math.Max(-dDist, Math.Abs(dDist) - 0.5f * m_fWallThickness)));
+
+                return fFinalDist;
             }
 		}
     }
